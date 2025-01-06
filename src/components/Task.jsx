@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-export default function Task({ task }) {
+export default function Task({ task, onChangeTask, onDeleteTask }) {
   const [isEditing, setIsEditing] = useState(false);
 
   let taskContent;
@@ -11,6 +11,12 @@ export default function Task({ task }) {
         <input
           type="text"
           value={task.text}
+          onChange={(e) =>
+            onChangeTask({
+              ...task,
+              text: e.target.value,
+            })
+          }
           className="border rounded-sm border-black px-2"
         />
         <button
@@ -37,9 +43,24 @@ export default function Task({ task }) {
   return (
     <li>
       <label className="flex gap-2 my-2 mx-2">
-        <input type="checkbox" className="border border-black" />
+        <input
+          type="checkbox"
+          checked={task.done}
+          onChange={(e) =>
+            onChangeTask({
+              ...task,
+              done: e.target.checked,
+            })
+          }
+          className="border border-black"
+        />
         {taskContent}
-        <button className="border rounded-sm border-black px-2">Delete</button>
+        <button
+          onClick={() => onDeleteTask(task.id)}
+          className="border rounded-sm border-black px-2"
+        >
+          Delete
+        </button>
       </label>
     </li>
   );
