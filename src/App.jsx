@@ -15,31 +15,39 @@ function App() {
 
   // handler
   const handleAddTask = (text) => {
-    setTasks([
-      ...tasks,
-      {
-        id: getNextId(tasks),
-        text: text,
-        done: false,
-      },
-    ]);
+    
   };
 
   const handleChangeTask = (task) => {
-    const nextTask = tasks.map((t) => {
-      if (t.id === task.id) {
-        return task;
-      } else {
-        return t;
-      }
-    });
-
-    setTasks(nextTask);
+    
   };
 
   const handleDeleteTask = (taskId) => {
-    setTasks(tasks.filter((t) => t.id !== taskId));
+    
   };
+
+  // setTasks([
+  //   ...tasks,
+  //   {
+  //     id: getNextId(tasks),
+  //     text: text,
+  //     done: false,
+  //   },
+  // ]);
+
+
+  // const nextTask = tasks.map((t) => {
+  //   if (t.id === task.id) {
+  //     return task;
+  //   } else {
+  //     return t;
+  //   }
+  // });
+
+  // setTasks(nextTask);
+
+
+  // setTasks(tasks.filter((t) => t.id !== taskId));
 
   return (
     <div className="m-10">
