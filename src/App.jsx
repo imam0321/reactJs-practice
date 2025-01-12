@@ -41,15 +41,22 @@ function App() {
     setTasks(tasks.filter((t) => t.id !== taskId));
   };
 
+
+function App() {
+
+
   return (
     <div className="m-10">
       <h1 className="text-2xl m-2">Prague itinerary</h1>
+
       <AddTask onAdd={handleAddTask} />
       <TaskList
         tasks={tasks}
         onChangeTask={handleChangeTask}
         onDeleteTask={handleDeleteTask}
       />
+
+
     </div>
   );
 }
