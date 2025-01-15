@@ -6,8 +6,14 @@ import Root from "./Root";
 import ErrorPage from "./Error";
 import Contact from "./Contact";
 import { getContactLoader, getContactsLoader } from "./loaders/ContactsLoader";
-import { createContactAction, editContactAction } from "./actions/ContactsAction";
+import {
+  createContactAction,
+  deleteContactAction,
+  editContactAction,
+  updateContactFavoriteAction,
+} from "./actions/ContactsAction";
 import EditContact from "./EditContact";
+import Index from "./Index";
 
 const router = createBrowserRouter([
   {
@@ -18,15 +24,30 @@ const router = createBrowserRouter([
     action: createContactAction,
     children: [
       {
-        path: "/contacts/:contactId",
-        element: <Contact />,
-        loader: getContactLoader,
-      },
-      {
-        path: "/contacts/:contactId/edit",
-        element: <EditContact />,
-        loader: getContactLoader,
-        action: editContactAction
+        errorElement: <ErrorPage />,
+        children: [
+          {
+            index: true,
+            element: <Index />,
+          },
+          {
+            path: "/contacts/:contactId",
+            element: <Contact />,
+            loader: getContactLoader,
+            action: updateContactFavoriteAction,
+          },
+          {
+            path: "/contacts/:contactId/edit",
+            element: <EditContact />,
+            loader: getContactLoader,
+            action: editContactAction,
+          },
+          {
+            path: "/contacts/:contactId/destroy",
+            action: deleteContactAction,
+            errorElement: <div>Oops! There is an error</div>,
+          },
+        ],
       },
     ],
   },
