@@ -8,3 +8,4 @@
 - 4.10 (Synchronizing with Effects - Fetching Data)
 - 4.23 Reusing Logic with Custom Hooks - Part 1
 - 5.1 React Router v6
+- 5.2 API Request with Axios in React
