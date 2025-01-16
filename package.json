@@ -8,11 +8,11 @@
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "server": "json-server -p 8000 src/data/db.json"
+    "server": "json-server -p 8000 --no-cors src/data/db.json"
   },
   "dependencies": {
     "axios": "^1.7.9",
-    "json-server": "^1.0.0-beta.3",
+    "json-server": "^0.17.4",
     "localforage": "^1.10.0",
     "match-sorter": "^8.0.0",
     "react": "^18.3.1",

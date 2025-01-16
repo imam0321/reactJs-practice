@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import Posts from "./components/Posts.jsx";
 import EditPost from "./components/EditPost.jsx";
 import AddPost from "./components/AddPost.jsx";
-import axios from "axios";
+import api from "./api/api.js";
 
 function App() {
   const [posts, setPosts] = useState([]);
@@ -18,37 +18,22 @@ function App() {
         ...newPost,
       };
 
-      const response = await axios.post(
-        "http://localhost:8000/posts",
-        finalPost
-      );
+      const response = await api.post("/posts", finalPost);
 
       setPosts([...posts, response.data]);
-    } catch (error) {
-      if (error.response) {
-        setError(
-          `Error from server status: ${error.response.status} - message: ${error.response.data}`
-        );
-      } else {
-        setError(error.message);
-      }
+    } catch (err) {
+      setError(err.message);
     }
   };
 
   const handleDeletePost = async (postId) => {
     if (confirm("Are you sure you want to delete the post?")) {
       try {
-        await axios.delete(`http://localhost:8000/posts/${postId}`);
+        await api.delete(`/posts/${postId}`);
         const newPosts = posts.filter((post) => post.id !== postId);
         setPosts(newPosts);
-      } catch (error) {
-        if (error.response) {
-          setError(
-            `Error from server status: ${error.response.status} - message: ${error.response.data}`
-          );
-        } else {
-          setError(error.message);
-        }
+      } catch (err) {
+        setError(err.message);
       }
     } else {
       console.log("You chose not to delete the post!");
@@ -57,42 +42,26 @@ function App() {
 
   const handleEditPost = async (updatedPost) => {
     try {
-      const response = await axios.patch(
-        `http://localhost:8000/posts/${updatedPost.id}`,
-        updatedPost
-      );
+      const response = await api.patch(`/posts/${updatedPost.id}`, updatedPost);
       const updatedPosts = posts.map((post) =>
         post.id === response.data.id ? response.data : post
       );
 
       setPosts(updatedPosts);
-    } catch (error) {
-      if (error.response) {
-        setError(
-          `Error from server status: ${error.response.status} - message: ${error.response.data}`
-        );
-      } else {
-        setError(error.message);
-      }
+    } catch (err) {
+      setError(err.message);
     }
   };
 
   useEffect(() => {
     const fetchPosts = async () => {
       try {
-        const response = await axios.get("http://localhost:8000/posts");
-        console.log(response.data);
+        const response = await api.get("/posts");
         if (response && response.data) {
           setPosts(response.data);
         }
-      } catch (error) {
-        if (error.response) {
-          setError(
-            `Error from server status: ${error.response.status} - message: ${error.response.data}`
-          );
-        } else {
-          setError(error.message);
-        }
+      } catch (err) {
+        setError(err.message);
       }
     };
 
