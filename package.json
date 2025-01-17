@@ -8,6 +8,11 @@
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview",
+    "server": "json-server -p 8000 --no-cors src/data/db.json"
+  },
+  "dependencies": {
+    "axios": "^1.7.9",
+    "json-server": "^0.17.4",
     "server": "json-server -p 8000 src/data/data.json"
   },
   "dependencies": {
