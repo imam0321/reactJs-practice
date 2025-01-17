@@ -1,13 +1,17 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
+import { useState } from "react";
 
 // 2nd way
 const fetchProducts = async ({ queryKey }) => {
-  const response = await axios.get(`http://localhost:8000/${queryKey[0]}`);
+  const response = await axios.get(
+    `http://localhost:8000/products?_page=${queryKey[1].page}&_per_page=4`
+  );
   return response.data;
 };
 
 export default function ProductList({ setProductId }) {
+  const [page, setPage] = useState(1);
   const queryClient = useQueryClient();
   const {
     data: products,
@@ -15,14 +19,14 @@ export default function ProductList({ setProductId }) {
     isLoading,
     refetch,
   } = useQuery({
-    queryKey: ["products"],
+    queryKey: ["products", { page }],
     queryFn: fetchProducts,
     //NOTES: retry: false, // when retry is true, the data will fetched 3 times. when it is false, the data will be fetched only once.
     //NOTE: refetchInterval: 1000, // data will be fetched every 1 second
   });
 
   const handleClick = (id) => {
-    const product = products.find((product) => product.id === id);
+    const product = products.data.find((product) => product.id === id);
     setProductId(product.id);
   };
 
@@ -51,10 +55,10 @@ export default function ProductList({ setProductId }) {
   return (
     <>
       <div className="flex flex-col justify-center items-center p-2 w-3/5">
-        <h2 className="text-3xl my-2">Products List</h2>
+        <h2 className="text-2xl font-bold my-1">Products List</h2>
         <ul className="flex flex-wrap justify-center items-center ">
-          {products &&
-            products.map((product) => (
+          {products.data &&
+            products.data.map((product) => (
               <li
                 key={product.id}
                 className="flex flex-col items-center my-2 border rounded-sm w-1/2 relative"
@@ -82,6 +86,26 @@ export default function ProductList({ setProductId }) {
               </li>
             ))}
         </ul>
+        <div className="flex">
+          {products.prev && (
+            <button
+              className="p-1 mx-1 bg-gray-100 border cursor-pointer rounded-sm"
+              onClick={() => setPage(products.prev)}
+            >
+              {" "}
+              Prev{" "}
+            </button>
+          )}
+          {products.next && (
+            <button
+              className="p-1 mx-1 bg-gray-100 border cursor-pointer rounded-sm"
+              onClick={() => setPage(products.next)}
+            >
+              {" "}
+              Next{" "}
+            </button>
+          )}
+        </div>
       </div>
     </>
   );

@@ -5,14 +5,21 @@ import ProductDetail from "./components/ProductDetail";
 
 function App() {
   const [productId, setProductId] = useState(1);
+  const [productEdit, setProductEdit] = useState(null);
+
+  const handleProductEdit = (product) => {
+    setProductEdit(product);
+  };
 
   return (
-    <div>
-      <h1 className="text-xl text-center m-1">ReactJs Practice Get, ADD, Edit, Delete with React Query</h1>
+    <div className="max-h-screen">
+      <h1 className="text-xl text-center font-semibold m-1">
+        ReactJs Practice Get, ADD, Edit, Delete with React Query
+      </h1>
       <div className="flex">
-        <AddProduct/>
-        <ProductList setProductId={setProductId}/>
-        <ProductDetail id={productId}/>
+        <AddProduct productEdit={productEdit} />
+        <ProductList setProductId={setProductId} />
+        <ProductDetail id={productId} onEdit={handleProductEdit} />
       </div>
     </div>
   );

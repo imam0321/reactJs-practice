@@ -2,15 +2,15 @@
   "products": [
     {
       "id": "1",
-      "title": "iPhone 9",
+      "title": "iPhone 15",
       "description": "An apple mobile which is nothing like apple",
-      "price": 549,
+      "price": 5490,
       "rating": 4.69,
       "thumbnail": "https://www.applegadgetsbd.com/_next/image?url=https%3A%2F%2Fadminapi.applegadgetsbd.com%2Fstorage%2Fmedia%2Fthumb%2FiPhone-15-Plus-(2)-(1)-6945.jpg&w=256&q=100"
     },
     {
       "id": "2",
-      "title": "iPhone X",
+      "title": "iPhone X 12",
       "description": "SIM-Free, Model A19211 6.5-inch Super Retina HD display with OLED technology A12 Bionic chip with ...",
       "price": 899,
       "rating": 4.44,

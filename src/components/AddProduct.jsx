@@ -1,8 +1,8 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
-export default function AddProduct() {
+export default function AddProduct({ productEdit }) {
   const queryClient = useQueryClient();
   const [state, setState] = useState({
     title: "",
@@ -12,9 +12,30 @@ export default function AddProduct() {
     thumbnail: "",
   });
 
+  useEffect(() => {
+    if (productEdit) {
+      setState({
+        title: productEdit.title || "",
+        description: productEdit.description || "",
+        price: productEdit.price || "",
+        rating: productEdit.rating || "",
+        thumbnail: productEdit.thumbnail || "",
+      });
+    }
+  }, [productEdit]);
+
   const mutation = useMutation({
     mutationFn: (newProduct) => {
-      axios.post("http://localhost:8000/products", newProduct);
+      if (productEdit) {
+        // Update the product (PATCH request)
+        axios.patch(
+          `http://localhost:8000/products/${productEdit.id}`,
+          newProduct
+        );
+      } else {
+        // Create new product (POST request)
+        axios.post("http://localhost:8000/products", newProduct);
+      }
     },
     onSuccess: () => {
       // If an old value remains stackTraceLimit, replace it with the new value
@@ -51,7 +72,7 @@ export default function AddProduct() {
 
   return (
     <div className="m-2 p-2 bg-gray-100 w-1/5 h-1/2">
-      <h2 className="text-2xl my-2">Add a Product</h2>
+      <h2 className="text-2xl font-bold my-1">Add a Product</h2>
       {mutation.isSuccess && <p>Product added successful</p>}
       <form className="flex flex-col" onSubmit={submitData}>
         <input
@@ -89,7 +110,7 @@ export default function AddProduct() {
           type="submit"
           className="border-2 block border-x-green-400 rounded-lg px-4 py-1"
         >
-          Add Product
+          {productEdit ? "Update Product" : "Add Product"}
         </button>
       </form>
     </div>
