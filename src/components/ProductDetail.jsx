@@ -20,15 +20,19 @@ export default function ProductDetail({ id }) {
     queryFn: fetchProduct,
   });
 
+  const handleEdit = (id) => {
+    
+  }
+
   if (isLoading) return <div>Product details Fetching...</div>;
   if (error) return <div>{error.message}</div>;
 
   return (
-    <div className="w-1/4">
-      <h1 className="text-3xl my-2">Product Details</h1>
+    <div className="w-1/5">
+      <h1 className="text-3xl my-4">Product Details</h1>
       <div className="border bg-gray-100 p-4 text-md rounded flex flex-col">
         <img
-          src={""}
+          src={product.thumbnail}
           alt={product.title}
           className="object-cover h-24 w-24 border rounded-full m-auto"
         />
@@ -38,6 +42,7 @@ export default function ProductDetail({ id }) {
           <li>USD {product.price}</li>
           <li>{product.rating}/5</li>
         </ul>
+        <button onClick={()=> handleEdit(product.id)} className="border-2 block border-x-green-400 rounded-lg px-4 py-1 hover:bg-slate-200 my-2">Edit Product</button>
       </div>
     </div>
   );
