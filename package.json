@@ -7,11 +7,19 @@
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "server": "json-server -p 8000 src/data/data.json"
   },
   "dependencies": {
+    "@tanstack/react-query": "^5.64.1",
+    "axios": "^1.7.9",
+    "json-server": "^1.0.0-beta.3",
+    "localforage": "^1.10.0",
+    "match-sorter": "^8.0.0",
     "react": "^18.3.1",
-    "react-dom": "^18.3.1"
+    "react-dom": "^18.3.1",
+    "react-router-dom": "^7.1.1",
+    "sort-by": "^0.0.2"
   },
   "devDependencies": {
     "@eslint/js": "^9.17.0",
