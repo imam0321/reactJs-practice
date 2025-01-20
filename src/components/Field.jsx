@@ -6,7 +6,7 @@ export default function Field({ label, children, htmlFor, error }) {
     <div>
       {label && (
         <label
-          className="flex flex-col items-start justify-start p-0 w-full my-2 text-lg font-bold"
+          className="flex flex-col items-start justify-start p-0 w-full my-2 text-md font-semibold"
           htmlFor={id}
         >
           {label}

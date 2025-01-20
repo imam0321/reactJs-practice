@@ -60,7 +60,7 @@ export default function LoginForm() {
             />
           </Field>
         </FieldSet>
-        <div className="text-red-400">{errors?.root?.random?.message}</div>
+        <div className="text-red-400">{errors?.root?.random.message}</div>
         <Field>
           <button className="border-2 block border-y-green-400 rounded-lg cursor-pointer mx-2 px-4 py-1">
             Login
