@@ -11,3 +11,4 @@
 - 5.2 API Request with Axios in React
 - 5.3 Tanstack/React Query
 - 5.4 React Hook Form 
+- 5.7 Animation in React with Framer Motion
