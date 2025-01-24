@@ -1,7 +1,9 @@
 # ReactJs Practice LWS
 
 ## Branch Name
+
 - test
+- 1.1 Login Registration page
 - 3.12 (Extracting State Logic into a Reducer )
 - 3.13 (Three steps to Consolidate state logic with a Reducer)
 - 3.15 (Writing concise reducers with Immer)
@@ -10,5 +12,5 @@
 - 5.1 React Router v6
 - 5.2 API Request with Axios in React
 - 5.3 Tanstack/React Query
-- 5.4 React Hook Form 
+- 5.4 React Hook Form
 - 5.7 Animation in React with Framer Motion
